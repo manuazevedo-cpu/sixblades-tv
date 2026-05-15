@@ -138,24 +138,125 @@ function pickColor(raw){
 
 function cleanTitle(raw){ return raw.replace(/^\[(G|S|P)\]\s*/i, ""); }
 
+function parseDate(str){
+  var d = str.replace(/\D/g,"");
+  return new Date(parseInt(d.slice(0,4)), parseInt(d.slice(4,6))-1, parseInt(d.slice(6,8)));
+}
+
+function parseUntil(str){
+  str = str.trim();
+  var d = str.replace(/\D/g,"");
+  if(str.indexOf("T") !== -1 && str.indexOf("Z") !== -1){
+    // Parse as true UTC, then convert to LOCAL date
+    // e.g. 20260613T055959Z = June 13 05:59 UTC = June 12 23:59 MDT (Denver)
+    // getFullYear/Month/Date on a Date object returns LOCAL time values
+    var utc = new Date(Date.UTC(
+      parseInt(d.slice(0,4)),
+      parseInt(d.slice(4,6)) - 1,
+      parseInt(d.slice(6,8)),
+      parseInt(d.slice(8,10)  || "0"),
+      parseInt(d.slice(10,12) || "0"),
+      parseInt(d.slice(12,14) || "0")
+    ));
+    // Return midnight of the LOCAL calendar date this UTC moment falls on
+    return new Date(utc.getFullYear(), utc.getMonth(), utc.getDate());
+  }
+  var yr = parseInt(d.slice(0,4));
+  var mo = parseInt(d.slice(4,6)) - 1;
+  var dy = parseInt(d.slice(6,8));
+  return new Date(yr, mo, dy);
+}
+
+function expandRRULE(dtstart, rrule, title, windowStart, windowEnd){
+  var events = [];
+  var freq    = (rrule.match(/FREQ=([^;\r\n]+)/) || [])[1] || "";
+  var interval= parseInt((rrule.match(/INTERVAL=(\d+)/) || [])[1] || "1");
+  var countM  = rrule.match(/COUNT=(\d+)/);
+  var untilM  = rrule.match(/UNTIL=([^;\r\n]+)/);
+  var bydayM  = rrule.match(/BYDAY=([^;\r\n]+)/);
+  var maxCount= countM ? parseInt(countM[1]) : 500;
+  var until   = untilM ? parseUntil(untilM[1]) : windowEnd;
+  var dayMap  = {SU:0,MO:1,TU:2,WE:3,TH:4,FR:5,SA:6};
+  var bydays  = bydayM ? bydayM[1].split(",").map(function(d){ return dayMap[d.replace(/[^A-Z]/g,"")]; }) : null;
+
+  var cur = new Date(dtstart);
+  var added = 0; // only count actually added occurrences
+
+  while(cur <= until && cur <= windowEnd && added < maxCount){
+    var matches = !bydays || bydays.indexOf(cur.getDay()) !== -1;
+    if(matches){
+      if(cur >= windowStart && cur <= windowEnd){
+        events.push({ date: new Date(cur), title: title });
+      }
+      added++; // count only real occurrences
+    }
+    // Advance cursor
+    if(freq === "DAILY"){
+      cur.setDate(cur.getDate() + interval);
+    } else if(freq === "WEEKLY"){
+      if(bydays && bydays.length > 1){
+        cur.setDate(cur.getDate() + 1);
+      } else {
+        cur.setDate(cur.getDate() + 7 * interval);
+      }
+    } else if(freq === "MONTHLY"){
+      cur.setMonth(cur.getMonth() + interval);
+    } else if(freq === "YEARLY"){
+      cur.setFullYear(cur.getFullYear() + interval);
+    } else { break; }
+  }
+  return events;
+}
+
 function parseICS(text){
   text = text.replace(/\r\n[ \t]/g,"").replace(/\n[ \t]/g,"");
   var events = [];
+  var now = new Date();
+  var windowStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  var windowEnd   = new Date(now.getFullYear(), now.getMonth() + 3, 0);
+
   var blocks = text.split("BEGIN:VEVENT");
   for(var i = 1; i < blocks.length; i++){
     var b = blocks[i];
     var summaryMatch = b.match(/SUMMARY:([^\r\n]+)/);
     if(!summaryMatch) continue;
-    var summary = summaryMatch[1].trim();
-    var dtMatch = b.match(/DTSTART[^:]*:([^\r\n]+)/);
+    var summary = summaryMatch[1].trim().replace(/\\n/g," ").replace(/\\,/g,",");
+
+    var dtMatch  = b.match(/DTSTART[^:]*:([^\r\n]+)/);
     if(!dtMatch) continue;
-    var digits = dtMatch[1].replace(/\D/g,"");
-    var yr  = parseInt(digits.slice(0,4));
-    var mo  = parseInt(digits.slice(4,6)) - 1;
-    var day = parseInt(digits.slice(6,8));
-    var date = new Date(yr, mo, day);
-    if(!isNaN(date.getTime())){
-      events.push({ date: date, title: summary.replace(/\\n/g," ").replace(/\\,/g,",") });
+    var dtstart = parseDate(dtMatch[1]);
+    if(isNaN(dtstart.getTime())) continue;
+
+    // DTEND — to detect & expand multi-day all-day events
+    var dtendMatch = b.match(/DTEND[^:]*:([^\r\n]+)/);
+    var dtend = dtendMatch ? parseDate(dtendMatch[1]) : null;
+
+    // Excluded dates
+    var exdates = [];
+    var exMatch = b.match(/EXDATE[^:]*:([^\r\n]+)/g);
+    if(exMatch) exMatch.forEach(function(ex){
+      ex.split(":")[1].split(",").forEach(function(d){ exdates.push(parseDate(d).toDateString()); });
+    });
+
+    var rruleMatch = b.match(/RRULE:([^\r\n]+)/);
+    if(rruleMatch){
+      // Recurring event
+      var expanded = expandRRULE(dtstart, rruleMatch[1], summary, windowStart, windowEnd);
+      expanded.forEach(function(ev){
+        if(exdates.indexOf(ev.date.toDateString()) === -1) events.push(ev);
+      });
+    } else if(dtend && dtend > dtstart){
+      // Multi-day all-day event: show only on FIRST day
+      // (DTEND is exclusive per RFC 5545, so Jun 8 + DTEND Jun 14 = Jun 8-13)
+      // We show just the start date to avoid cluttering every day
+      if(exdates.indexOf(dtstart.toDateString()) === -1){
+        events.push({ date: dtstart, title: summary });
+      }
+    } else {
+      // Single event
+      if(exdates.indexOf(dtstart.toDateString()) === -1){
+        events.push({ date: dtstart, title: summary });
+      }
     }
   }
   return events;
