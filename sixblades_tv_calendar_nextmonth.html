@@ -104,10 +104,10 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;ba
 var ICS_URL = "https://p114-caldav.icloud.com/published/2/MTEzMTE3NTQ5MzExMzExN92jTqEiTkVB4MTQCEyRxRA6tygi4g4gcAMvsQ3z4ZUkuT2tFT4xPn0-oYPVFoJUWrKZMjEalt7Mz5Sl8I6BwSg";
 var REFRESH  = 30 * 60 * 1000;
 var PROXIES  = [
-  function(u){ return "https://api.allorigins.win/raw?url=" + encodeURIComponent(u); },
-  function(u){ return "https://corsproxy.io/?" + encodeURIComponent(u); },
-  function(u){ return "https://thingproxy.freeboard.io/fetch/" + u; },
-  function(u){ return "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u); }
+  function(u){ return "https://api.allorigins.win/raw?url=" + encodeURIComponent(u) + "&t=" + Date.now(); },
+  function(u){ return "https://corsproxy.io/?" + encodeURIComponent(u + "?t=" + Date.now()); },
+  function(u){ return "https://thingproxy.freeboard.io/fetch/" + u + "?t=" + Date.now(); },
+  function(u){ return "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u) + "&t=" + Date.now(); }
 ];
 var MONTHS   = ["January","February","March","April","May","June","July","August","September","October","November","December"];
 var MONTHS_S = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
@@ -246,11 +246,14 @@ function parseICS(text){
         if(exdates.indexOf(ev.date.toDateString()) === -1) events.push(ev);
       });
     } else if(dtend && dtend > dtstart){
-      // Multi-day all-day event: show only on FIRST day
-      // (DTEND is exclusive per RFC 5545, so Jun 8 + DTEND Jun 14 = Jun 8-13)
-      // We show just the start date to avoid cluttering every day
-      if(exdates.indexOf(dtstart.toDateString()) === -1){
-        events.push({ date: dtstart, title: summary });
+      // Multi-day all-day event: expand to every day (DTEND is exclusive)
+      // e.g. DTSTART Jun 15 + DTEND Jun 20 = shows Jun 15,16,17,18,19
+      var cur = new Date(dtstart);
+      while(cur < dtend){
+        if(exdates.indexOf(cur.toDateString()) === -1){
+          events.push({ date: new Date(cur), title: summary });
+        }
+        cur.setDate(cur.getDate() + 1);
       }
     } else {
       // Single event
