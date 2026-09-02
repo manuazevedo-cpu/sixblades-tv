@@ -95,7 +95,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;ba
   </div>
 </div>
 <div class="bottom-bar">
-  <span>7444 S University Blvd, Littleton, CO 80126</span>
+  <span>7444 S University Blvd, Littleton, CO 80122</span>
   <span class="sep">|</span>
   <span>(720) 441-4408</span>
 </div>
@@ -104,6 +104,7 @@ header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:4px;ba
 var ICS_URL = "https://p114-caldav.icloud.com/published/2/MTEzMTE3NTQ5MzExMzExN92jTqEiTkVB4MTQCEyRxRA6tygi4g4gcAMvsQ3z4ZUkuT2tFT4xPn0-oYPVFoJUWrKZMjEalt7Mz5Sl8I6BwSg";
 var REFRESH  = 30 * 60 * 1000;
 var PROXIES  = [
+  function(u){ return "events.ics?t=" + Date.now(); },  // same-origin copy refreshed by GitHub Actions
   function(u){ return "https://api.allorigins.win/raw?url=" + encodeURIComponent(u) + "&t=" + Date.now(); },
   function(u){ return "https://corsproxy.io/?" + encodeURIComponent(u + "?t=" + Date.now()); },
   function(u){ return "https://thingproxy.freeboard.io/fetch/" + u + "?t=" + Date.now(); },
