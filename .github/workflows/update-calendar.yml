@@ -1,0 +1,33 @@
+name: Update calendar feed
+
+on:
+  schedule:
+    - cron: "*/30 * * * *"   # every 30 minutes
+  workflow_dispatch:         # manual "Run workflow" button
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download the iCloud calendar
+        run: |
+          ICS_URL=$(grep -o 'https://[^"]*caldav\.icloud\.com/published/[^"]*' sixblades_tv_calendar.html | head -1)
+          if [ -z "$ICS_URL" ]; then echo "ICS_URL not found in HTML"; exit 1; fi
+          curl -fsSL --max-time 60 "$ICS_URL" -o events.new.ics
+          grep -q 'BEGIN:VCALENDAR' events.new.ics || { echo "Not a calendar file"; exit 1; }
+          mv events.new.ics events.ics
+          echo "Events in feed: $(grep -c 'BEGIN:VEVENT' events.ics)"
+
+      - name: Commit if changed
+        run: |
+          git config user.name "calendar-bot"
+          git config user.email "actions@github.com"
+          git add events.ics
+          git diff --cached --quiet && echo "No changes" && exit 0
+          git commit -m "Update events.ics"
+          git push
