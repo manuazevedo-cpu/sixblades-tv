@@ -172,6 +172,16 @@
   },
   {
    "date": "2026-10-16",
+   "start": "17:10",
+   "duration": 50,
+   "title": "EXTRA FRIDAY JUNIORS (7-12yrs)",
+   "color": "red",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-16",
    "start": "18:00",
    "duration": 60,
    "title": "Open Mat",
