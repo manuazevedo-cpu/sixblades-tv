@@ -23,11 +23,21 @@ jobs:
           mv events.new.ics events.ics
           echo "Events in feed: $(grep -c 'BEGIN:VEVENT' events.ics)"
 
+      - name: Download the Google calendar (test copy)
+        env:
+          GCAL_ICS_URL: ${{ secrets.GCAL_ICS_URL }}
+        run: |
+          if [ -z "$GCAL_ICS_URL" ]; then echo "GCAL_ICS_URL secret is empty"; exit 1; fi
+          curl -fsSL --max-time 60 "$GCAL_ICS_URL" -o events_google.new.ics
+          grep -q 'BEGIN:VCALENDAR' events_google.new.ics || { echo "Not a calendar file"; exit 1; }
+          mv events_google.new.ics events_google.ics
+          echo "Google events in feed: $(grep -c 'BEGIN:VEVENT' events_google.ics)"
+
       - name: Commit if changed
         run: |
           git config user.name "calendar-bot"
           git config user.email "actions@github.com"
-          git add events.ics
+          git add events.ics events_google.ics
           git diff --cached --quiet && echo "No changes" && exit 0
           git commit -m "Update events.ics"
           git push
