@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Six Blades Jiu Jitsu South Denver - Class Schedule</title>
+<meta name="viewport" content="width=1920, height=1080">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1920px;height:1080px;overflow:hidden;background:#fff;color:#111;font-family:'Montserrat',Arial,sans-serif}
+.page{width:1920px;height:1080px;display:flex;flex-direction:column;padding:28px 40px 20px}
+header{display:flex;align-items:flex-end;justify-content:space-between;height:84px;border-bottom:5px solid #943C28;padding-bottom:12px;flex:none}
+h1{font-family:'League Spartan','Montserrat',Arial,sans-serif;font-weight:800;font-size:46px;letter-spacing:.5px;line-height:1}
+.sub{font-size:26px;font-weight:600;color:#943C28}
+.grid{flex:1;min-height:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:12px;margin-top:16px}
+.day{min-width:0;min-height:0;display:flex;flex-direction:column;background:#f6f5f3;border-radius:10px;overflow:hidden}
+.day.today{background:#fbefeb;outline:4px solid #943C28;outline-offset:-4px}
+.dh{flex:none;text-align:center;padding:10px 0 8px;border-bottom:2px solid #e3ded8}
+.dn{font-size:22px;font-weight:700;letter-spacing:2px;color:#555}
+.dd{font-family:'League Spartan','Montserrat',Arial,sans-serif;font-size:40px;font-weight:800;line-height:1.1}
+.today .dd,.today .dn{color:#943C28}
+.list{flex:1;min-height:0;display:flex;flex-direction:column;gap:8px;padding:10px 8px;overflow:hidden}
+.card{background:#fff;border-left:8px solid var(--c);border-radius:6px;padding:8px 10px;min-width:0;box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.card.past{opacity:.45}
+.t{font-size:var(--fs);font-weight:700;color:#333;line-height:1.2}
+.n{font-size:var(--fs2);font-weight:700;line-height:1.18;margin-top:2px;color:#161616;overflow-wrap:anywhere}
+.i{font-size:var(--fs3);font-weight:500;color:#555;margin-top:3px;line-height:1.2}
+.none{margin:auto;font-size:22px;color:#aaa;font-weight:500}
+footer{flex:none;height:40px;display:flex;align-items:flex-end;justify-content:space-between;font-size:20px;font-weight:600;color:#444}
+footer b{color:#943C28}
+</style>
+</head>
+<body>
+<div class="page">
+ <header><h1>Six Blades Jiu Jitsu South Denver</h1><div class="sub" id="range"></div></header>
+ <div class="grid" id="grid"></div>
+ <footer><span>Book a Free Private Class &middot; Call or text <b>720-441-4408</b></span><span></span></footer>
+</div>
+<script>
+var TZ='America/Denver';
+var COLORS={red:'#c82333',purple:'#5a2d91',teal:'#17a2b8',blue:'#0056b3',black:'#262d32',yellow:'#e0a800',brown:'#a0522d',green:'#1e7e34',orange:'#d9660b',pink:'#c2185b',gray:'#6c757d',grey:'#6c757d'};
+var DAYS=['SUN','MON','TUE','WED','THU','FRI','SAT'];
+var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+var data=null;
+
+function denverNow(){
+  var p=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
+  var o={};p.forEach(function(x){o[x.type]=x.value});
+  return {date:o.year+'-'+o.month+'-'+o.day,min:(+o.hour)*60+(+o.minute)};
+}
+function addDays(iso,n){var d=new Date(iso+'T12:00:00Z');d.setUTCDate(d.getUTCDate()+n);return d.toISOString().slice(0,10)}
+function dow(iso){return new Date(iso+'T12:00:00Z').getUTCDay()}
+function fmt(m){var h=Math.floor(m/60)%24,mm=m%60,ap=h>=12?'pm':'am',h12=h%12||12;return h12+(mm?':'+(mm<10?'0':'')+mm:':00')+ap}
+function range(s,d){var a=toMin(s),b=a+d,x=fmt(a),y=fmt(b);
+  if(x.slice(-2)===y.slice(-2))x=x.slice(0,-2);return x+' - '+y}
+function toMin(s){var p=s.split(':');return (+p[0])*60+(+p[1])}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+
+function render(){
+  if(!data)return;
+  var now=denverNow(), start=addDays(now.date,-dow(now.date));
+  var grid=document.getElementById('grid');grid.innerHTML='';
+  var s=new Date(start+'T12:00:00Z'),e=new Date(addDays(start,6)+'T12:00:00Z');
+  document.getElementById('range').textContent='Class Schedule  |  '+MONTHS[s.getUTCMonth()]+' '+s.getUTCDate()+' - '+(e.getUTCMonth()!==s.getUTCMonth()?MONTHS[e.getUTCMonth()]+' ':'')+e.getUTCDate();
+  for(var i=0;i<7;i++){
+    var d=addDays(start,i), evs=data.events.filter(function(x){return x.date===d});
+    var day=document.createElement('div');day.className='day'+(d===now.date?' today':'');
+    var dn=+d.slice(8);
+    var h='<div class="dh"><div class="dn">'+DAYS[i]+'</div><div class="dd">'+dn+'</div></div><div class="list">';
+    if(!evs.length)h+='<div class="none">No classes</div>';
+    evs.forEach(function(x){
+      var past=d<now.date||(d===now.date&&toMin(x.start)+x.duration<=now.min);
+      h+='<div class="card'+(past?' past':'')+'" style="--c:'+(COLORS[x.color]||'#262d32')+'"><div class="t">'+range(x.start,x.duration)+'</div><div class="n">'+esc(x.title)+'</div>'+(x.instructors.length?'<div class="i">'+esc(x.instructors.join(', '))+'</div>':'')+'</div>';
+    });
+    day.innerHTML=h+'</div>';grid.appendChild(day);
+  }
+  fit();
+}
+function fit(){
+  var sizes=[[20,23,18],[19,22,17],[18,21,16],[17,20,15],[16,19,14],[15,18,13],[14,17,12]];
+  document.querySelectorAll('.list').forEach(function(l){
+    for(var k=0;k<sizes.length;k++){
+      l.style.setProperty('--fs',sizes[k][0]+'px');l.style.setProperty('--fs2',sizes[k][1]+'px');l.style.setProperty('--fs3',sizes[k][2]+'px');
+      if(l.scrollHeight<=l.clientHeight+1)break;
+    }
+  });
+}
+function load(){
+  fetch('schedule.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.json()}).then(function(j){data=j;render()}).catch(function(){});
+}
+load();
+setInterval(load,10*60*1000);
+setInterval(render,60*1000);
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){render()});
+</script>
+</body>
+</html>
