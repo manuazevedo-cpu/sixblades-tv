@@ -144,6 +144,21 @@ function parseDate(str){
   return new Date(parseInt(d.slice(0,4)), parseInt(d.slice(4,6))-1, parseInt(d.slice(6,8)));
 }
 
+var TV_TZ = "America/Denver";
+function utcToDenverDate(ms){
+  var parts = new Intl.DateTimeFormat("en-US",{timeZone:TV_TZ,year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date(ms));
+  var o = {};
+  parts.forEach(function(x){ o[x.type] = x.value; });
+  return new Date(parseInt(o.year,10), parseInt(o.month,10)-1, parseInt(o.day,10));
+}
+// Google Calendar writes timed events in UTC (…Z); convert to the Denver calendar day
+function parseEventDate(str){
+  str = str.trim();
+  var m = str.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})Z$/);
+  if(m) return utcToDenverDate(Date.UTC(+m[1],+m[2]-1,+m[3],+m[4],+m[5],+m[6]));
+  return parseDate(str);
+}
+
 function parseUntil(str){
   str = str.trim();
   var d = str.replace(/\D/g,"");
@@ -225,12 +240,12 @@ function parseICS(text){
 
     var dtMatch  = b.match(/DTSTART[^:]*:([^\r\n]+)/);
     if(!dtMatch) continue;
-    var dtstart = parseDate(dtMatch[1]);
+    var dtstart = parseEventDate(dtMatch[1]);
     if(isNaN(dtstart.getTime())) continue;
 
     // DTEND — to detect & expand multi-day all-day events
     var dtendMatch = b.match(/DTEND[^:]*:([^\r\n]+)/);
-    var dtend = dtendMatch ? parseDate(dtendMatch[1]) : null;
+    var dtend = dtendMatch ? parseEventDate(dtendMatch[1]) : null;
 
     // Excluded dates
     var exdates = [];
