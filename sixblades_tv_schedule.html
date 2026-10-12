@@ -26,7 +26,7 @@ h1{font-family:'League Spartan','Montserrat',Arial,sans-serif;font-weight:800;fo
 .t{font-size:var(--fs);font-weight:700;color:#333;line-height:1.2}
 .n{font-size:var(--fs2);font-weight:700;line-height:1.18;margin-top:2px;color:#161616;overflow-wrap:anywhere}
 .i{font-size:var(--fs3);font-weight:500;color:#555;margin-top:3px;line-height:1.2}
-.none{margin:auto;font-size:22px;color:#aaa;font-weight:500}
+.list.tight{gap:5px;padding:8px 6px}.list.tight .card{padding:5px 8px;border-left-width:6px}.list.tight .n{margin-top:1px}.list.tight .i{margin-top:1px}.list.mini .i{display:none}.none{margin:auto;font-size:22px;color:#aaa;font-weight:500}
 footer{flex:none;height:40px;display:flex;align-items:flex-end;justify-content:space-between;font-size:20px;font-weight:600;color:#444}
 footer b{color:#943C28}
 </style>
@@ -79,11 +79,17 @@ function render(){
 }
 function fit(){
   var sizes=[[20,23,18],[19,22,17],[18,21,16],[17,20,15],[16,19,14],[15,18,13],[14,17,12]];
+  var tight=[[14,16,12],[13,15,11],[12,14,11],[11,13,10]];
   document.querySelectorAll('.list').forEach(function(l){
-    for(var k=0;k<sizes.length;k++){
-      l.style.setProperty('--fs',sizes[k][0]+'px');l.style.setProperty('--fs2',sizes[k][1]+'px');l.style.setProperty('--fs3',sizes[k][2]+'px');
-      if(l.scrollHeight<=l.clientHeight+1)break;
-    }
+    l.classList.remove('tight','mini');
+    function set(z){l.style.setProperty('--fs',z[0]+'px');l.style.setProperty('--fs2',z[1]+'px');l.style.setProperty('--fs3',z[2]+'px')}
+    function ok(){return l.scrollHeight<=l.clientHeight+1}
+    var k;
+    for(k=0;k<sizes.length;k++){set(sizes[k]);if(ok())return}
+    l.classList.add('tight');
+    for(k=0;k<tight.length;k++){set(tight[k]);if(ok())return}
+    l.classList.add('mini');
+    for(k=0;k<tight.length;k++){set(tight[k]);if(ok())return}
   });
 }
 function load(){
