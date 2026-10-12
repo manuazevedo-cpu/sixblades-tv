@@ -8,8 +8,8 @@
 <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:1920px;height:1080px;overflow:hidden;background:#fff;color:#111;font-family:'Montserrat',Arial,sans-serif}
-.page{width:1920px;height:1080px;display:flex;flex-direction:column;padding:28px 40px 20px}
+html,body{width:100%;height:100%;overflow:hidden;background:#fff;color:#111;font-family:'Montserrat',Arial,sans-serif}
+.page{position:absolute;left:50%;top:50%;transform-origin:center center;width:1920px;height:1080px;display:flex;flex-direction:column;padding:28px 40px 20px}
 header{display:flex;align-items:flex-end;justify-content:space-between;height:84px;border-bottom:5px solid #943C28;padding-bottom:12px;flex:none}
 h1{font-family:'League Spartan','Montserrat',Arial,sans-serif;font-weight:800;font-size:46px;letter-spacing:.5px;line-height:1}
 .sub{font-size:26px;font-weight:600;color:#943C28}
@@ -43,6 +43,11 @@ var COLORS={red:'#c82333',purple:'#5a2d91',teal:'#17a2b8',blue:'#0056b3',black:'
 var DAYS=['SUN','MON','TUE','WED','THU','FRI','SAT'];
 var MONTHS=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
 var data=null;
+function scalePage(){
+  var k=Math.min(window.innerWidth/1920,window.innerHeight/1080);
+  document.querySelector('.page').style.transform='translate(-50%,-50%) scale('+k+')';
+}
+scalePage();window.addEventListener('resize',scalePage);
 
 function denverNow(){
   var p=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).formatToParts(new Date());
