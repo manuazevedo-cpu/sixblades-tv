@@ -1,238 +1,6 @@
 {
  "events": [
   {
-   "date": "2026-10-12",
-   "start": "06:30",
-   "duration": 60,
-   "title": "Jiu Jitsu: All Levels (13+)",
-   "color": "red",
-   "instructors": [
-    "Rodrigo Antunes"
-   ]
-  },
-  {
-   "date": "2026-10-12",
-   "start": "16:10",
-   "duration": 50,
-   "title": "Jiu Jitsu: Little Champs (3 - 6yrs) & Tiny Grapplers (3- 4yrs)",
-   "color": "purple",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-12",
-   "start": "17:10",
-   "duration": 50,
-   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
-   "color": "teal",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-12",
-   "start": "18:15",
-   "duration": 75,
-   "title": "Jiu Jitsu: All Levels (13+)",
-   "color": "red",
-   "instructors": [
-    "Rodrigo Antunes"
-   ]
-  },
-  {
-   "date": "2026-10-13",
-   "start": "12:00",
-   "duration": 60,
-   "title": "Jiu Jitsu: Fundamentals & Intermediate (13+)",
-   "color": "blue",
-   "instructors": [
-    "Thor Evans"
-   ]
-  },
-  {
-   "date": "2026-10-13",
-   "start": "16:10",
-   "duration": 50,
-   "title": "Jiu Jitsu: Little Champs (3 - 6yrs)",
-   "color": "purple",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-13",
-   "start": "17:10",
-   "duration": 50,
-   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
-   "color": "teal",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-13",
-   "start": "18:15",
-   "duration": 60,
-   "title": "Jiu Jitsu: Fundamentals & Intermediate (13+)",
-   "color": "blue",
-   "instructors": [
-    "Alex Bely"
-   ]
-  },
-  {
-   "date": "2026-10-14",
-   "start": "06:30",
-   "duration": 60,
-   "title": "No Gi: Fundamentals (13+)",
-   "color": "yellow",
-   "instructors": [
-    "Rodrigo Antunes"
-   ]
-  },
-  {
-   "date": "2026-10-14",
-   "start": "16:10",
-   "duration": 50,
-   "title": "Jiu Jitsu: Little Champs (3 - 6yrs) & Tiny Grapplers (3- 4yrs)",
-   "color": "purple",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-14",
-   "start": "17:10",
-   "duration": 50,
-   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
-   "color": "teal",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-14",
-   "start": "18:15",
-   "duration": 60,
-   "title": "No Gi: Fundamentals (13+)",
-   "color": "yellow",
-   "instructors": [
-    "Rodrigo Antunes"
-   ]
-  },
-  {
-   "date": "2026-10-15",
-   "start": "12:00",
-   "duration": 60,
-   "title": "Jiu Jitsu: Fundamentals & Intermediate (13+)",
-   "color": "blue",
-   "instructors": [
-    "Thor Evans"
-   ]
-  },
-  {
-   "date": "2026-10-15",
-   "start": "16:10",
-   "duration": 50,
-   "title": "Jiu Jitsu: Little Champs (3 - 6yrs)",
-   "color": "purple",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-15",
-   "start": "17:10",
-   "duration": 50,
-   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
-   "color": "teal",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-15",
-   "start": "18:15",
-   "duration": 60,
-   "title": "Jiu Jitsu: Fundamentals & Intermediate (13+)",
-   "color": "blue",
-   "instructors": [
-    "Alex Bely"
-   ]
-  },
-  {
-   "date": "2026-10-16",
-   "start": "06:30",
-   "duration": 60,
-   "title": "Jiu Jitsu: All Levels (13+)",
-   "color": "red",
-   "instructors": [
-    "Rodrigo Antunes"
-   ]
-  },
-  {
-   "date": "2026-10-16",
-   "start": "17:10",
-   "duration": 50,
-   "title": "EXTRA FRIDAY JUNIORS (7-12yrs)",
-   "color": "red",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-16",
-   "start": "18:00",
-   "duration": 60,
-   "title": "Open Mat",
-   "color": "black",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-17",
-   "start": "08:15",
-   "duration": 30,
-   "title": "Parent & Me",
-   "color": "brown",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-10-17",
-   "start": "09:00",
-   "duration": 50,
-   "title": "Jiu Jitsu: Little Champs (3 - 6yrs) & Tiny Grapplers (3- 4yrs)",
-   "color": "purple",
-   "instructors": [
-    "Matheus Loureiro",
-    "Theo Robison"
-   ]
-  },
-  {
-   "date": "2026-10-17",
-   "start": "10:00",
-   "duration": 50,
-   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
-   "color": "teal",
-   "instructors": [
-    "Matheus Loureiro",
-    "Theo Robison"
-   ]
-  },
-  {
-   "date": "2026-10-17",
-   "start": "11:00",
-   "duration": 60,
-   "title": "Jiu Jitsu: Fundamentals & Intermediate",
-   "color": "blue",
-   "instructors": [
-    "Steve Toyryla"
-   ]
-  },
-  {
    "date": "2026-10-19",
    "start": "06:30",
    "duration": 60,
@@ -466,6 +234,226 @@
   },
   {
    "date": "2026-10-24",
+   "start": "11:00",
+   "duration": 60,
+   "title": "Jiu Jitsu: Fundamentals & Intermediate",
+   "color": "blue",
+   "instructors": [
+    "Steve Toyryla"
+   ]
+  },
+  {
+   "date": "2026-10-26",
+   "start": "06:30",
+   "duration": 60,
+   "title": "Jiu Jitsu: All Levels (13+)",
+   "color": "red",
+   "instructors": [
+    "Rodrigo Antunes"
+   ]
+  },
+  {
+   "date": "2026-10-26",
+   "start": "16:10",
+   "duration": 50,
+   "title": "Jiu Jitsu: Little Champs (3 - 6yrs) & Tiny Grapplers (3- 4yrs)",
+   "color": "purple",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-26",
+   "start": "17:10",
+   "duration": 50,
+   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
+   "color": "teal",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-26",
+   "start": "18:15",
+   "duration": 75,
+   "title": "Jiu Jitsu: All Levels (13+)",
+   "color": "red",
+   "instructors": [
+    "Rodrigo Antunes"
+   ]
+  },
+  {
+   "date": "2026-10-27",
+   "start": "12:00",
+   "duration": 60,
+   "title": "Jiu Jitsu: Fundamentals & Intermediate (13+)",
+   "color": "blue",
+   "instructors": [
+    "Thor Evans"
+   ]
+  },
+  {
+   "date": "2026-10-27",
+   "start": "16:10",
+   "duration": 50,
+   "title": "Jiu Jitsu: Little Champs (3 - 6yrs)",
+   "color": "purple",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-27",
+   "start": "17:10",
+   "duration": 50,
+   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
+   "color": "teal",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-27",
+   "start": "17:10",
+   "duration": 50,
+   "title": "Juniors Black Belt Club (By Invitation Only)",
+   "color": "black",
+   "instructors": [
+    "Rodrigo Antunes"
+   ]
+  },
+  {
+   "date": "2026-10-27",
+   "start": "18:15",
+   "duration": 60,
+   "title": "Jiu Jitsu: Fundamentals & Intermediate (13+)",
+   "color": "blue",
+   "instructors": [
+    "Alex Bely"
+   ]
+  },
+  {
+   "date": "2026-10-28",
+   "start": "06:30",
+   "duration": 60,
+   "title": "No Gi: Fundamentals (13+)",
+   "color": "yellow",
+   "instructors": [
+    "Rodrigo Antunes"
+   ]
+  },
+  {
+   "date": "2026-10-28",
+   "start": "16:10",
+   "duration": 50,
+   "title": "Jiu Jitsu: Little Champs (3 - 6yrs) & Tiny Grapplers (3- 4yrs)",
+   "color": "purple",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-28",
+   "start": "17:10",
+   "duration": 50,
+   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
+   "color": "teal",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-28",
+   "start": "18:15",
+   "duration": 60,
+   "title": "No Gi: Fundamentals (13+)",
+   "color": "yellow",
+   "instructors": [
+    "Rodrigo Antunes"
+   ]
+  },
+  {
+   "date": "2026-10-29",
+   "start": "12:00",
+   "duration": 60,
+   "title": "Jiu Jitsu: Fundamentals & Intermediate (13+)",
+   "color": "blue",
+   "instructors": [
+    "Thor Evans"
+   ]
+  },
+  {
+   "date": "2026-10-29",
+   "start": "16:10",
+   "duration": 50,
+   "title": "Jiu Jitsu: Little Champs (3 - 6yrs)",
+   "color": "purple",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-29",
+   "start": "17:10",
+   "duration": 50,
+   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
+   "color": "teal",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-29",
+   "start": "17:10",
+   "duration": 50,
+   "title": "Juniors Black Belt Club (By Invitation Only)",
+   "color": "black",
+   "instructors": [
+    "Rodrigo Antunes"
+   ]
+  },
+  {
+   "date": "2026-10-29",
+   "start": "18:15",
+   "duration": 60,
+   "title": "Jiu Jitsu: Fundamentals & Intermediate (13+)",
+   "color": "blue",
+   "instructors": [
+    "Alex Bely"
+   ]
+  },
+  {
+   "date": "2026-10-29",
+   "start": "18:30",
+   "duration": 75,
+   "title": "C.O.R.E. Leadership Program Classes",
+   "color": "red",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-30",
+   "start": "06:30",
+   "duration": 60,
+   "title": "Jiu Jitsu: All Levels (13+)",
+   "color": "red",
+   "instructors": [
+    "Rodrigo Antunes"
+   ]
+  },
+  {
+   "date": "2026-10-30",
+   "start": "18:00",
+   "duration": 60,
+   "title": "Open Mat",
+   "color": "black",
+   "instructors": [
+    "Matheus Loureiro"
+   ]
+  },
+  {
+   "date": "2026-10-31",
    "start": "11:00",
    "duration": 60,
    "title": "Jiu Jitsu: Fundamentals & Intermediate",
