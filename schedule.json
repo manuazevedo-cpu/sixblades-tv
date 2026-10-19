@@ -131,6 +131,16 @@
    ]
   },
   {
+   "date": "2026-10-21",
+   "start": "18:15",
+   "duration": 50,
+   "title": "Womens Only Class",
+   "color": "red",
+   "instructors": [
+    "Leanna Dittrich"
+   ]
+  },
+  {
    "date": "2026-10-22",
    "start": "12:00",
    "duration": 60,
@@ -198,6 +208,16 @@
    "color": "red",
    "instructors": [
     "Rodrigo Antunes"
+   ]
+  },
+  {
+   "date": "2026-10-23",
+   "start": "16:10",
+   "duration": 50,
+   "title": "Extra class - Tiny Grapplers & Little Champs",
+   "color": "red",
+   "instructors": [
+    "Matheus Loureiro"
    ]
   },
   {
@@ -370,6 +390,16 @@
    "color": "yellow",
    "instructors": [
     "Rodrigo Antunes"
+   ]
+  },
+  {
+   "date": "2026-10-28",
+   "start": "18:15",
+   "duration": 50,
+   "title": "Womens Only Class",
+   "color": "red",
+   "instructors": [
+    "Leanna Dittrich"
    ]
   },
   {
