@@ -12,14 +12,14 @@ jobs:
   update:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Download the Google calendar (Six Blades Events)
         env:
           GCAL_ICS_URL: ${{ secrets.GCAL_ICS_URL }}
         run: |
           if [ -z "$GCAL_ICS_URL" ]; then echo "GCAL_ICS_URL secret is empty"; exit 1; fi
-          curl -fsSL --max-time 60 "$GCAL_ICS_URL" -o events.new.ics
+          curl -fsSL --max-time 60 --retry 3 --retry-delay 20 --retry-all-errors "$GCAL_ICS_URL" -o events.new.ics
           grep -q 'BEGIN:VCALENDAR' events.new.ics || { echo "Not a calendar file"; exit 1; }
           COUNT=$(grep -c 'BEGIN:VEVENT' events.new.ics)
           if [ "$COUNT" -lt 1 ]; then echo "Feed has no events, keeping the previous copy"; exit 1; fi
