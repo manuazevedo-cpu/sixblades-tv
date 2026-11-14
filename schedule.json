@@ -222,12 +222,34 @@
   },
   {
    "date": "2026-11-14",
+   "start": "09:00",
+   "duration": 50,
+   "title": "Jiu Jitsu: Little Champs (3 - 6yrs) & Tiny Grapplers (3- 4yrs)",
+   "color": "purple",
+   "instructors": [
+    "Matheus Loureiro",
+    "Theo Robison"
+   ]
+  },
+  {
+   "date": "2026-11-14",
    "start": "09:30",
    "duration": 60,
    "title": "Family Day",
    "color": "black",
    "instructors": [
     "Rodrigo Antunes",
+    "Matheus Loureiro",
+    "Theo Robison"
+   ]
+  },
+  {
+   "date": "2026-11-14",
+   "start": "10:00",
+   "duration": 50,
+   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
+   "color": "teal",
+   "instructors": [
     "Matheus Loureiro",
     "Theo Robison"
    ]
