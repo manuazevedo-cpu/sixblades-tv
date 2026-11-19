@@ -383,105 +383,14 @@
    ]
   },
   {
-   "date": "2026-11-26",
-   "start": "12:00",
-   "duration": 60,
-   "title": "Jiu Jitsu: Fundamentals & Intermediate (13+)",
-   "color": "blue",
-   "instructors": [
-    "Thor Evans"
-   ]
-  },
-  {
-   "date": "2026-11-26",
-   "start": "16:10",
-   "duration": 50,
-   "title": "Jiu Jitsu: Little Champs (3 - 6yrs)",
-   "color": "purple",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-11-26",
-   "start": "17:10",
-   "duration": 50,
-   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
-   "color": "teal",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-11-26",
-   "start": "17:10",
-   "duration": 50,
-   "title": "Juniors Black Belt Club (By Invitation Only)",
-   "color": "black",
-   "instructors": [
-    "Rodrigo Antunes"
-   ]
-  },
-  {
-   "date": "2026-11-26",
-   "start": "18:15",
-   "duration": 60,
-   "title": "Jiu Jitsu: Fundamentals & Intermediate (13+)",
-   "color": "blue",
-   "instructors": [
-    "Alex Bely"
-   ]
-  },
-  {
    "date": "2026-11-27",
-   "start": "06:30",
-   "duration": 60,
-   "title": "Jiu Jitsu: All Levels (13+)",
-   "color": "red",
-   "instructors": [
-    "Rodrigo Antunes"
-   ]
-  },
-  {
-   "date": "2026-11-27",
-   "start": "18:00",
-   "duration": 60,
-   "title": "Open Mat",
-   "color": "black",
-   "instructors": [
-    "Matheus Loureiro"
-   ]
-  },
-  {
-   "date": "2026-11-28",
    "start": "09:00",
-   "duration": 50,
-   "title": "Jiu Jitsu: Little Champs (3 - 6yrs) & Tiny Grapplers (3- 4yrs)",
-   "color": "purple",
-   "instructors": [
-    "Matheus Loureiro",
-    "Theo Robison"
-   ]
-  },
-  {
-   "date": "2026-11-28",
-   "start": "10:00",
-   "duration": 50,
-   "title": "Jiu Jitsu: Juniors (7 - 12yrs)",
-   "color": "teal",
-   "instructors": [
-    "Matheus Loureiro",
-    "Theo Robison"
-   ]
-  },
-  {
-   "date": "2026-11-28",
-   "start": "11:00",
    "duration": 60,
-   "title": "Jiu Jitsu: Fundamentals & Intermediate",
-   "color": "blue",
+   "title": "Open Mat: Adults ",
+   "color": "black",
    "instructors": [
-    "Steve Toyryla"
+    "Rodrigo Antunes",
+    "Matheus Loureiro"
    ]
   }
  ]
